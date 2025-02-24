@@ -1,5 +1,7 @@
 import { test, expect } from '@playwright/test';
 
+test.describe.configure({ mode: 'serial' });
+
 test('Login as existing user', async ({ page }) => {
   await page.goto('https://automaticityacademy.ngrok.app/login');
 
