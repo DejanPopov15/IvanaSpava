@@ -38,21 +38,18 @@ test('Add multiple products from different pages to cart', async ({ page }) => {
         console.log('Check', product.name);
         for(const productToAdd of productsToAdd)
         {
-            // Check if the product's name matches the one you want
             if (product.name === productToAdd.name) {
-                // Print the details of the product
                 console.log(`Adding product to cart: ${product.name}`);
 
-                // Now you can locate the product card using the name (example)
-                const productCardLocator = page.locator(`h1:has-text("${product.name}")`).locator('xpath=..');
+                const productCardLocator = page.locator(productToAdd.addToCartButton);
                 await expect(productCardLocator).toBeVisible();
 
-                // Find the "Add to Cart" button inside the product card (you may need to adjust the selector)
-                const addToCartButton = productCardLocator.locator('button.add-to-cart');  // Adjust the button selector
-                await expect(addToCartButton).toBeVisible();  // Ensure the button is visible
+                // Naci add to cart
+                const addToCartButton = productCardLocator.locator('button.add-to-cart');  
+                await expect(addToCartButton).toBeVisible();  
 
-                // Click the "Add to Cart" button
-                await addToCartButton.click();
+                // Kliknuti na add to cart
+                await productToAdd.addToCartButton.click();
             }
         }
     }
