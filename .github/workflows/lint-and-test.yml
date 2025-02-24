@@ -1,0 +1,25 @@
+name: Lint & Test
+
+on: [push, pull_request]  # Pokreće se na svakom push-u ili PR-u
+
+jobs:
+  build:
+    runs-on: ubuntu-latest  # OS na kojem će se pokretati
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3  # Klonira repozitorijum
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v3
+        with:
+          node-version: 18
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Run ESLint
+        run: npx eslint . --max-warnings=0
+
+      - name: Run tests
+        run: npm test
+ 
